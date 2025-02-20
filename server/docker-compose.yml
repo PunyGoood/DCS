@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  server1:
+    build:
+      context: ./server1
+    ports:
+      - "5001:5000"
+    networks:
+      - server-network
+
+  server2:
+    build:
+      context: ./server2
+    ports:
+      - "5002:5000"
+    networks:
+      - server-network
+
+  server3:
+    build:
+      context: ./server3
+    ports:
+      - "5003:5000"
+    networks:
+      - server-network
+
+  server4:
+    build:
+      context: ./server4
+    ports:
+      - "5004:5000"
+    networks:
+      - server-network
+
+networks:
+  server-network:
+    driver: bridge

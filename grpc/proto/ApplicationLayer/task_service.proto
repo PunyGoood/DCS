@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "DomainLayer/request.proto";
+import "DomainLayer/response.proto";
+import "DomainLayer/stream_message.proto";
+
+package grpc;
+option go_package = ".;grpc";
+
+message TaskServiceSend{
+  string node_key = 1;
+  string task_id = 2;
+
+}
+
+service TaskService{
+    rpc Get(Request) returns (Response) {}; //获取任务采用Unary RPC
+    rpc Subscribe(stream StreamMessage) returns (Response) {};  //典型的流式文件上传需求
+    rpc SendInformation(TaskServiceSend) returns (Response) {}; //提交单次信息
+}
+

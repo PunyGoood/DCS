@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package grpc;
+option go_package = ".;grpc";
+
+enum StreamMessageEnum{
+  
+  RUN_TASK = 0; //要求子节点运行任务
+  
+  CANCEL_TASK = 1; //要求子节点取消任务
+
+  CREATE_DATA = 2; //增加某些数据
+
+  CREATE_LOGS = 3; //增加日志
+
+  CONNECT = 4;
+
+  DISCONNECT = 5;
+
+  SEND = 6;
+
+  PING=7; //心跳战术的一部分
+}

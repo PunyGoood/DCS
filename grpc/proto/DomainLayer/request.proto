@@ -1,0 +1,12 @@
+syntax="proto3";
+
+package grpc;
+option go_package = ".;grpc";
+
+message Request{
+
+    string node_id =1;
+    string message=2;
+    bytes data=3;
+    
+}

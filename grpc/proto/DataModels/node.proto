@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package grpc;
+option go_package = ".;grpc";
+
+
+message Node{
+  string id = 1;
+  string name = 2;
+  string key = 3;
+  bool is_master = 11;
+  //服务器地址相关待写
+}

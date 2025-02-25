@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "DomainLayer/stream_message_enum.proto";
+
+
+package grpc;
+option go_package = ".;grpc";
+
+message StreamMessage {
+  StreamMessageEnum enum = 1;
+  string node_id=2;
+  string node_key = 3;
+  string key = 4;
+  string source_id = 5;
+  string target_id = 6;
+  bytes data = 7;
+  string error = 8;
+}

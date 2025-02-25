@@ -1,0 +1,13 @@
+syntax="proto3";
+
+package grpc;
+
+import "DomainLayer/response_enum.proto";
+option go_package = ".;grpc";
+
+message Response {
+    ResponseEnum enum = 1;
+    string message = 2;
+    bytes data = 3;
+    string error = 4;
+}

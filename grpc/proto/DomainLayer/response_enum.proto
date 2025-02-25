@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package grpc;
+option go_package = ".;grpc";
+
+enum ResponseEnum {
+  GOOD = 0;
+  ERROR = 1;
+  BAD_DETAIL = 2;  
+  NOT_FOUND = 3;
+}

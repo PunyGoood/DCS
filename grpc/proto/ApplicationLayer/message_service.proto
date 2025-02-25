@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "DomainLayer/stream_message.proto";
+
+package grpc;
+option go_package = ".;grpc";
+
+//简单的流式通信
+service MessageService {
+  rpc Contact(stream StreamMessage) returns (stream StreamMessage){};
+}

@@ -1,0 +1,11 @@
+syntax="proto3";
+
+package grpc;
+option go_package = ".;grpc";
+
+message NodeBlock{
+
+    string name=1;
+    string key = 2;
+    bool is_root = 3;
+}

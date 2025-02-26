@@ -1,6 +1,7 @@
 $protoFiles = @(
     "D:/DT/grpc/proto/ApplicationLayer/message_service.proto",
     "D:/DT/grpc/proto/ApplicationLayer/task_service.proto",
+    "D:/DT/grpc/proto/ApplicationLayer/node_service.proto",
     "D:/DT/grpc/proto/DataModels/node.proto",
     "D:/DT/grpc/proto/DataModels/task.proto",
     "D:/DT/grpc/proto/DomainLayer/node_.proto",
@@ -9,6 +10,7 @@ $protoFiles = @(
     "D:/DT/grpc/proto/DomainLayer/response_enum.proto",
     "D:/DT/grpc/proto/DomainLayer/stream_message.proto",
     "D:/DT/grpc/proto/DomainLayer/stream_message_enum.proto"
+
 )
 
 $outputPath = "./proto"

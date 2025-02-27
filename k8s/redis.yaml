@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: alpaca
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: redis
+  clusterIP
+---
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim    # 添加 PVC
+metadata:
+  name: redis-data-pvc
+  namespace: alpaca
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi    # 根据实际需求调整存储大小
+---
+
+
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: redis
+  namespace: alpaca
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      nodeSelector:           
+        database: "true"      # 确保和 MySQL 在同一节点
+      containers:
+      - image: redis:6.2
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+        args: ["--requirepass", "     "]  # 设置 Redis 密码
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-data-pvc

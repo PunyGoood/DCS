@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpaca-child
+  namespace: alpaca
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: crawlab-worker
+  template:
+    metadata:
+      labels:
+        app: crawlab-worker
+    spec:
+      containers:
+      - image: crawlabteam/crawlab:latest
+        imagePullPolicy: Always
+        name: crawlab
+        env:
+        - name: ALPACA_NODE_ROOT
+          value: "N"
+        - name: ALPACA_REDIS_ADDRESS
+          value: "redis"
+        - name: ALPACA_GRPC_ADDRESS
+          value: "alpaca"
+

@@ -1,9 +1,7 @@
 package client
 
 import (
-	"github.com/crawlab-team/crawlab/core/errors"
-	"github.com/crawlab-team/crawlab/core/interfaces"
-	"github.com/crawlab-team/crawlab/trace"
+	"github.com/PunyGoood/DCS/system/interfaces"
 	"github.com/emirpasic/gods/lists/arraylist"
 	"math/rand"
 )

@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+package proto;
+
+message TaskRequest {
+  string client_id = 1;
+}
+
+// 定义任务响应消息，包含待爬取的 URL
+message TaskResponse {
+  string url = 1;
+}
+
+// 定义数据请求消息，包含爬取到的数据
+message DataRequest {
+  string key = 1;
+  string url = 2;
+  string data = 3;
+}
+
+// 定义数据响应消息
+message DataResponse {
+  bool success = 1;
+}
+
+message NodeInfo {
+  string key = 1;
+  bool isMaster = 2;
+}
+
+message ResponseMessage{
+  bool Success = 1;
+  int32 MessageType = 4;
+  string Message = 2;
+  string Url = 3;
+}
+
+// 定义爬虫服务
+service CrawlerService {
+  // 分发任务的 RPC 方法
+  rpc DistributeTask (TaskRequest) returns (TaskResponse);
+  // 收集数据的 RPC 方法
+  rpc CollectData (DataRequest) returns (DataResponse);
+}
+
+service Subscribe{
+  rpc Subscribe(NodeInfo) returns (stream ResponseMessage);
+  rpc Unsubscribe(NodeInfo) returns (ResponseMessage);
+}

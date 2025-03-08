@@ -14,17 +14,8 @@ type TaskService struct {
 }
 
 
-func (c *GrpcClient) Stop() error {
 
-}
 
-func (s *TaskService) ReportStatus() {
-	for {
-		// 假设这里有报告状态的逻辑
-		fmt.Println("Reporting status")
-		time.Sleep(10 * time.Second)
-	}	
-}
 
 func (s *TaskService) Fetch() {
 	for {

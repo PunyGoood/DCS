@@ -16,7 +16,7 @@ import (
 
 type GrpcClient struct {
 
-	nodeCfg *NodeConfig
+	nodeCfg interface.NodeConfig
 	conn *grpc.ClientConn
 	once sync.Once
 
@@ -44,7 +44,13 @@ func (cc *GrpcClientV2) Connect() (err error) {
 		address := cc.address.String()
 
 		var opts []grpc.DialOption
-		
+
+		// kacp := keepalive.ClientParameters{
+        //     Time:                10 * time.Second,
+        //     Timeout:             time.Second,
+        //     PermitWithoutStream: true,
+        // }
+        // opts = append(opts, grpc.WithKeepaliveParams(kacp))
 		//opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 		creds := credentials.NewTLS(&tls.Config{
 			InsecureSkipVerify: false, 

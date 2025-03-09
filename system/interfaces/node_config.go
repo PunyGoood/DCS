@@ -3,7 +3,9 @@ package interfaces
 type NodeConfig interface {
 	Init() error
 	Reload() error
-	GetANode() entity
+	GetANode() Entity
 	GetAuthKey() string
-	Address string
+
+	GetNodeName() string
+	IsMaster() bool
 }

@@ -1,4 +1,4 @@
 package interfaces
 
-type CrawlerOptions struct {
+type CrawlerRunOptions struct {
 }

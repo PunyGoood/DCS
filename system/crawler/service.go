@@ -3,35 +3,30 @@ package crawler
 import (
 	"sync"
 
+	config "github.com/PunyGoood/DCS/system/config"
+	model "github.com/PunyGoood/DCS/system/models"
+	"github.com/PunyGoood/DCS/system/models/services"
+	"github.com/PunyGoood/DCS/trace"
 	log2 "github.com/apex/log"
-	config2 "github.com/PunyGoood/DCS/system/config"
-	"github.com/crawlab-team/crawlab/core/constants"
-	"github.com/crawlab-team/crawlab/core/errors"
-	"github.com/crawlab-team/crawlab/core/interfaces"
-	model "github.com/crawlab-team/crawlab/core/models/models/v2"
 
-	"github.com/PunyGoood/DCS/system/grpc/server"
 	"github.com/PunyGoood/DCS/system/interfaces"
 	"github.com/PunyGoood/DCS/system/node/config"
-	"github.com/PunyGoood/DCS/system/task/manager"
 	"github.com/PunyGoood/DCS/system/task/scheduler"
-	"github.com/apex/log"
+)
 
 type Service struct {
-	// dependencies
-	NodeCfg      interfaces.NodeCfgfig
+	NodeCfg      interfaces.NodeConfig
 	schedulerSvc *scheduler.Service
-	cron         *cron.Cron
 	syncLock     bool
 
 	// basic configs
 	cfgPath string
 }
 
-//Schedule
-func (svc *Service) Init(id int64, opts *interfaces.SpiderRunOptions) (taskIds []int64, err error) {
+// Schedule
+func (svc *Service) Init(id int64, opts *interfaces.CrawlerRunOptions) (taskIds []int64, err error) {
 
-	s, err := service.NewModelService[model.Crawler]().GetById(id)
+	s, err := services.NewModelService[model.Crawler]().GetById(id)
 	if err != nil {
 		return nil, err
 	}
@@ -39,16 +34,11 @@ func (svc *Service) Init(id int64, opts *interfaces.SpiderRunOptions) (taskIds [
 	return svc.schedule(s, opts)
 }
 
-//schedule Tasks
+// schedule Tasks
 func (svc *Service) schedule(s *model.Crawler, opts *interfaces.CrawlerOptions) (taskIds []int64, err error) {
 
-	t := &model.Task{
-
-
-	}
+	t := &model.Task{}
 	t.SetId()
-
-
 
 	return taskIds, nil
 }
@@ -57,7 +47,6 @@ func (svc *Service) getNodeIds(opts *interfaces.CrawlerOptions) (nodeIds []int64
 
 	return nodeIds, nil
 }
-
 
 func newCrawlerService() (svc *Service, err error) {
 	svc := &Service{
@@ -69,8 +58,7 @@ func newCrawlerService() (svc *Service, err error) {
 		return nil, err
 	}
 
-
-	// validate 
+	// validate
 	if !svc.NodeCfg.IsMaster() {
 		//待定
 		return nil, trace.TraceError()
@@ -79,8 +67,6 @@ func newCrawlerService() (svc *Service, err error) {
 
 	return svc, nil
 }
-
-var svcV2 *ServiceV2
 
 func GetCrawlerService() (svc *Service, err error) {
 	sync.Once.Do(func() {

@@ -10,7 +10,7 @@
 
 ## 体验系统
 ```
-git clone https://github.com/PunyGoood/DCS
+git clone https://github.com/PunyGoood/DCS.git
 cd demo/docker/main
 docker-compose up -d
 ```
